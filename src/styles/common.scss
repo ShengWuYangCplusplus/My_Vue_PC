@@ -1,0 +1,241 @@
+// 表格序号宽度  100px
+
+.outDiv{
+  width: 100%;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
+  border:1px solid #ebeef5;
+  padding: 20px;
+  min-height: 200px;
+}
+.baseSta{
+  width: 100%;
+ 
+}
+.searchBar{
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  .searchLeft{
+    display: flex;
+    flex-flow: row;
+    justify-content: center
+  }
+}
+.pageBar{
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+.tableBar{
+  position: relative;
+}
+//tab切换的小按钮 
+.tabRightBtn{
+  position:absolute;right:0px;top:4px;z-index:999
+}
+//检索表单样式
+.searchRow{
+  display:flex;flex-flow:row;justify-content:space-between
+}
+.inputContainer{
+  flex:2
+}
+.searchRowFont{
+  flex:1;justify-content:center;display:flex
+}
+.searchTag{
+  max-height:150px;overflow-y:scroll
+}
+
+//表格样式
+.tapTableContainer{
+  margin-top: 10px;
+}
+.dfc{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+//添加的表单form
+.formAdd{
+  width:80%;
+  min-width: 500px;
+}
+//编辑的表单form外部包裹的
+.formEditContainer{
+  min-width: 500px;
+  border-bottom:1px solid rgb(175, 176, 177);   //一级边框
+  margin-bottom:25px
+}
+
+//自制穿梭框
+.selfTransfer{
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  .transferBody{
+    display: flex;
+    flex-flow: row;
+    float: 1px;
+    .transLeft{
+      flex:3;
+    }
+    .transMiddle{
+      flex:1
+    }
+    .transMiddle{
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center
+    }
+    .transRight{
+      flex:3
+    }
+  }
+}
+//四级路由 顶部导航栏样式
+.tabClass {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #409eff;
+  .oneTitle{
+    font-weight: bold;
+    font-size: 16px;
+  }
+}
+.allinfochange {
+  padding: 20px 0px;
+}
+
+//老人 基础信息详情 表单样式
+.baseFormDiv{
+  display: flex;
+  width:100%;
+  flex-flow: column;
+  .baseFormCard{
+    margin-top: 15px;width: 100%;
+  }
+  .baseFormInner{
+    display:flex;flex-flow:row;justify-content:center;align-items:center;
+    .baseFormLeft{
+      flex:1;display:flex;flex-flow:column;align-items:center;
+      .leftFont{
+        margin-top: 15px;
+        .leftTitle{
+          font-weight: bold
+        }
+      }
+      .leftBtn{
+        margin-top: 10px
+      }
+    }
+    .baseFormMiddle{
+      flex:5
+    }
+    .baseFormRight{
+      flex:1
+    }
+  }
+}
+//人脸图片
+.faceImgContainer{
+  display:flex;align-items:center;justify-content:center;flex-flow:column ;
+  .imgNameDiv{
+    span{
+      color:gray;
+      font-size:12px;
+      font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    }
+  }
+}
+//老人详情  健康数据
+
+
+
+//综合登记样式
+.approveTitle{
+  font-weight: bold;
+  font-size: 14px;
+}
+
+//顶部导航切换的内容  不要阴影和边框
+.noShadow{
+  box-shadow: 0 0 0 0;
+  border :0;
+  padding:20px;
+}
+
+
+//企业信息样式
+.bigFont {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.infoContainer {
+  display: flex;
+  flex-flow: column;
+  padding: 0px 40px;
+  .infoFormHead {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    .headFont {
+      width: 180px;
+      span {
+        font-weight: bold;
+        font-size: 15px;
+      }
+    }
+  }
+  .formContent {
+    padding-left: 140px;
+    padding-right: 140px;
+  }
+}
+
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+//图片上传
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: auto;
+  max-height: 150px;
+  display: block;
+}
+
+//按钮文字点击跳转
+.lookBase{
+  cursor: pointer;
+}
+
+.margin-top-twenty{
+  margin-top:20px
+}

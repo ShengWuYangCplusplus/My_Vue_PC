@@ -1,0 +1,31 @@
+.oneRow{
+  display: flex;
+  flex-flow: row;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.text{
+  color: gray;
+  display: inline-block;
+  text-align: left;
+  min-width:200px
+}
+.name{
+  color:black;
+  font-weight: bolder;
+  font-size: 14px;
+}
+.goalText,.levelDetail{
+  font-weight:bolder;font-size:13px;
+}
+.goalText{
+  color:#E6A23C
+}
+.levelDetail{
+  color:#67C23A
+}
+.levelText{
+  margin-left: 20px;
+}
