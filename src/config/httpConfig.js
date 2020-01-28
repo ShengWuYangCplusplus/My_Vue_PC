@@ -12,9 +12,9 @@ axios.interceptors.request.use(function (config) {
   config.cancelToken = new CancelToken((cancel) => {
     store.state.axiosPromiseCancel.push(cancel)
   })
-  let token = sessionStorage.getItem('token')
+  let token = localStorage.getItem('token')
   if (token) {
-    config.headers.common['Authorization'] = "Bearer" + " " + token
+    config.headers.common['authorization'] = "Bearer" + " " + token
   }
   return config
 }, function (error) {

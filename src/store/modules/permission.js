@@ -121,7 +121,10 @@ export default {
           'business',
           'business-apply',
           'business-age',
-          'business-operate'
+          'business-operate',
+          'system',
+          'system-users',
+          'system-roles',
         ]
       }
       // commit('SET_AVATAR', permissionList.avatar)

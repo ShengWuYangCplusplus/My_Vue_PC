@@ -1919,6 +1919,90 @@ const dynamicRoutes = [
       //   ]
       // }
     ]
+  },
+  {
+    path: '/system',
+    redirect: 'system-users',
+    name: 'system',
+    component: () => import('@/views/system/index.vue'),
+    meta: {
+      name: '系统管理',
+      icon: 'icon-shezhi',
+      isSub: true,
+      menuKey: 'system'
+    },
+    children: [
+      {
+        path: 'users',
+        name: 'system-users',
+        redirect: {
+          name: 'system-users-list'
+        },
+        component: () => import('@/views/system/users/index.vue'),
+        meta: {
+          name: '用户管理',
+          icon: 'icon-my',
+          menuKey: 'system-users'
+        },
+        children: [
+          {
+            path: 'list',
+            name: 'system-users-list',
+            component: () => import('@/views/system/users/list.vue'),
+            meta: {
+              required: false,
+              name: '用户列表',
+              menuKey: 'system-users'
+            }
+          },
+          {
+            path: 'add',
+            name: 'system-users-add',
+            component: () => import('@/views/system/users/add.vue'),
+            meta: {
+              required: false,
+              name: '添加用户',
+              menuKey: 'system-users'
+            }
+          },
+        ]
+      },
+      {
+        path: 'roles',
+        name: 'system-roles',
+        redirect: {
+          name: 'system-roles-list'
+        },
+        component: () => import('@/views/system/roles/index.vue'),
+        meta: {
+          name: '角色管理',
+          icon: 'icon-i',
+          menuKey: 'system-roles'
+        },
+        children: [
+          {
+            path: 'list',
+            name: 'system-roles-list',
+            component: () => import('@/views/system/roles/list.vue'),
+            meta: {
+              required: false,
+              name: '角色列表',
+              menuKey: 'system-roles'
+            }
+          },
+          {
+            path: 'add',
+            name: 'system-roles-add',
+            component: () => import('@/views/system/roles/add.vue'),
+            meta: {
+              required: false,
+              name: '添加角色',
+              menuKey: 'system-roles'
+            }
+          },
+        ]
+      },
+    ]
   }
 
 ]
