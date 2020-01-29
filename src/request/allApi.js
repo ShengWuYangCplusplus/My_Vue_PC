@@ -14,5 +14,18 @@ export const apis = {
     deleteUser(p) {
       return delone("/api/users", p)
     },
+  },
+  Role: {
+    getRoleList(p) {
+      return get('/api/role', p)
+    }
+  },
+  Department: {
+    getDepartmentList(p) {
+      return get('/api/department', p)
+    }
   }
 }
+export const getRoleList = (p) => get('/api/role', p)
+
+export const getDepartmentList = (p) => get('/api/department', p)

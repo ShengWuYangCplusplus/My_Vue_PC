@@ -16,20 +16,13 @@
           <el-input v-model="form.Phone"></el-input>
         </el-form-item>
         <el-form-item label="部门" prop="Department">
-          <el-select v-model="form.Department">
-            <el-option value="研发部"></el-option>
-            <el-option value="综合部"></el-option>
-            <el-option value="财务部"></el-option>
-            <el-option value="市场部"></el-option>
-            <el-option value="董事会"></el-option>
+          <el-select v-model="form.Department" clearable>
+            <el-option v-for="(item,index) in departmentList" :value="item.id" :label="item.department" :key="index"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="角色" prop="RoleId">
-           <el-select v-model="form.RoleId">
-            <el-option value="1" label="总经理"></el-option>
-            <el-option value="2" label="总监"></el-option>
-            <el-option value="3" label="主管"></el-option>
-            <el-option value="4" label="职工"></el-option>
+           <el-select v-model="form.RoleId" clearable>
+              <el-option v-for="(item,index) in roleList" :value="item.id" :label="item.role" :key="index"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label>
@@ -42,6 +35,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -83,6 +77,9 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('commondata', ['userName','roleList','departmentList'])
+  },
   methods: {
     save() {
       this.$refs['form'].validate(valid=>{
@@ -106,6 +103,9 @@ export default {
         }
       })
     }
+  },
+  mounted(){
+    this.$store.dispatch('commondata/FETCH_ROLE_DEPARTMENT')
   }
 }
 </script>

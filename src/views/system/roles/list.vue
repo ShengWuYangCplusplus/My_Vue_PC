@@ -9,7 +9,7 @@
         <navTopTag :searchTagList="searchTagList" @handleDelOne="handleDelOne"></navTopTag>
       </div>
       <div>
-        <el-button size="mini" type="primary" @click="add">添加角色</el-button>
+        <el-button size="mini" type="primary" @click="add">添加用户</el-button>
       </div>
     </div>
     <div>
@@ -34,6 +34,7 @@
 </template>
 <script>
 import searchForm from "./list-search";
+import {mapState} from 'vuex';
 export default {
   inject: ["reload"],
   components: {
@@ -53,7 +54,7 @@ export default {
             align: "center"
           },
           {
-            prop: "a",
+            prop: "UserName",
             label: "员工姓名",
             align: "center",
             route: true,
@@ -62,99 +63,28 @@ export default {
             }
           },
           {
-            prop: "b",
+            prop: "Phone",
             label: "手机号",
             align: "center",
           },
           {
-            prop: "c",
-            label: "身份证号",
+            prop: "department",
+            label: "部门",
             align: "center",
           },
           {
-            prop: "d",
-            label: "性别",
+            prop: "role",
+            label: "角色",
             align: "center",
           },
           {
-            prop: "e",
-            label: "职位",
-            align: "center",
-          },
-          {
-            prop: "f",
-            label: "入职日期",
-            align: "center",
-          },
-          {
-            prop: "g",
-            label: "个人专业证书",
+            prop: "Account",
+            label: "登录账号",
             align: "center"
-          },
-          {
-            prop: 'h',
-            label: '特长',
-            align: 'center',
           },
         ],
         currentObj: {
-          dataList: [
-            {
-              num: 1,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
-            {
-              num: 2,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
-            {
-              num: 3,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
-            {
-              num: 4,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
-            {
-              num: 5,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
-          ],
+          dataList: [],
           currentPage: 1,
           pageSize: 20,
           total: 0
@@ -186,12 +116,12 @@ export default {
           btns: [
             {
               size: "mini",
+              icon: "el-icon-delete",
               type: "text",
-              text: '详情',
-              style: "font-size:14px",
+              style: "font-size:16px;color:#F56C6C",
               disabled: false,
               method: (index, row) => {
-                this.handleDetail(index, row);
+                this.handleDelete( row);
               }
             }
           ]
@@ -202,12 +132,12 @@ export default {
   },
   methods: {
     add() {
-      this.$router.push({ name: 'institution-staff-add' });
+      this.$router.push({ name: 'system-users-add' });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
       this.searchTagList = this.$searchTag.getTagList(
-        this.$searchNameList.getSameOldSearch(),
+        [{ cnName: "姓名",engName: "username"}],
         i.searchData
       );
       this.$store.commit("setSearchForm", i.searchData);
@@ -274,9 +204,11 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
-          if (res.code === 0) {
+      this.$apis.Role.getRoleList(reqObj).then(
+        result => {
+          console.log(result)
+          if (result.code === 0) {
+            let res=result.data;
             const temp = {
               dataList: res.data.map((item, idx) => ({
                 num: res.index * res.size + idx + 1,
@@ -297,7 +229,9 @@ export default {
             this.$message.error(`获取数据失败${res.des}`)
           }
         }
-      ).catch(() => { }).finally(() => {
+      ).catch((err) => {
+        console.log(err)
+      }).finally(() => {
         this.allTableObj.loadObj.isLoading = false
       })
     },
@@ -354,10 +288,38 @@ export default {
     },
     handleDetail(i, j) {
       console.log(i, j)
+    },
+    handleDelete(i){
+      this.$confirm("确认删除该用户?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "error"
+      }).then(() => {
+        const loading = this.$loading({
+          lock: true,
+          text: "提交中...",
+          spinner: "el-icon-loading",
+          background: "rgba(0, 0, 0, 0.7)"
+        });
+        this.$apis.System.deleteUser({ userId: i.ID }).then(
+          res => {
+            if (res.code === 0) {
+              this.$message.success('删除成功')
+              this.reload()
+            } else {
+              this.$message.error(`删除失败:${res.des}`)
+            }
+          }
+        ).finally(() => {
+          loading.close()
+        })
+      }).catch(() => {
+        return
+      })
     }
   },
   mounted() {
-    // this.loadData({ index: 0, size: 20 })
+    this.loadData({ index: 0, size: 20 })
   }
 };
 </script>

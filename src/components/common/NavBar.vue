@@ -24,7 +24,8 @@ export default {
   },
   computed: {
     ...mapState(['isSidebarNavCollapse']),
-    ...mapState('permission', ['sidebarMenu', 'currentMenu'])
+    ...mapState('permission', ['sidebarMenu', 'currentMenu']),
+    ...mapState('data', ['userName'])
   },
   methods: {},
   components: {

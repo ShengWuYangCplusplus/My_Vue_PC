@@ -34,6 +34,7 @@
 </template>
 <script>
 import searchForm from "./list-search";
+import {mapState} from 'vuex';
 export default {
   inject: ["reload"],
   components: {
@@ -67,8 +68,13 @@ export default {
             align: "center",
           },
           {
-            prop: "Department",
+            prop: "department",
             label: "部门",
+            align: "center",
+          },
+          {
+            prop: "role",
+            label: "角色",
             align: "center",
           },
           {
