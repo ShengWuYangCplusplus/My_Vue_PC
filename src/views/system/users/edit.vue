@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <el-card>
-      <div slot="header">添加用户</div>
+  <div >
+    <el-card v-loading="isLoading">
+      <div slot="header">编辑用户</div>
       <el-form size="mini" :model="form" ref="form" :rules="userRule" labelWidth="130px" labelPosition="left">
         <el-form-item label="姓名" prop='UserName'>
           <el-input v-model="form.UserName"></el-input>
@@ -39,6 +39,7 @@ import {mapState} from 'vuex'
 export default {
   data() {
     return {
+      isLoading:false,
       form: {},
       userRule:{
         UserName:[
@@ -81,6 +82,18 @@ export default {
     ...mapState('commondata', ['userName','roleList','departmentList'])
   },
   methods: {
+    loadData(){
+      this.isLoading=true
+      this.$apis.System.getUserDetail({userid:this.$route.params.userid}).then(
+        res=>{
+          if(res.code===0){
+            this.form=res.data
+          }
+        }
+      ).finally(()=>{
+        this.isLoading=false
+      })
+    },
     save() {
       this.$refs['form'].validate(valid=>{
         if(valid){
@@ -90,12 +103,12 @@ export default {
               spinner: "el-icon-loading",
               background: "rgba(0, 0, 0, 0.7)"
             });
-          this.$apis.System.addUser(this.form).then(res=>{
+          this.$apis.System.updateUser(this.form).then(res=>{
             if(res.code===0){
-              this.$message.success('添加成功')
+              this.$message.success('编辑成功')
               this.$router.go(-1)
             }else{
-              this.$message.error(`添加失败:${res.des}`)
+              this.$message.error(`编辑失败:${res.des}`)
             }
           }).finally(()=>{
             loading.close()
@@ -106,6 +119,7 @@ export default {
   },
   mounted(){
     this.$store.dispatch('commondata/FETCH_ROLE_DEPARTMENT')
+    this.loadData()
   }
 }
 </script>

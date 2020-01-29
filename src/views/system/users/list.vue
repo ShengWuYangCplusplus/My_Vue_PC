@@ -116,6 +116,16 @@ export default {
           btns: [
             {
               size: "mini",
+              icon: "el-icon-edit",
+              type: "text",
+              style: "font-size:16px",
+              disabled: false,
+              method: (index, row) => {
+                this.handleEdit( row);
+              }
+            },
+            {
+              size: "mini",
               icon: "el-icon-delete",
               type: "text",
               style: "font-size:16px;color:#F56C6C",
@@ -123,7 +133,7 @@ export default {
               method: (index, row) => {
                 this.handleDelete( row);
               }
-            }
+            },
           ]
         },
         currentTab: "all",
@@ -288,6 +298,9 @@ export default {
     },
     handleDetail(i, j) {
       console.log(i, j)
+    },
+    handleEdit(i){
+      this.$router.push({name:'system-users-edit',params:{userid:i.ID}})
     },
     handleDelete(i){
       this.$confirm("确认删除该用户?", "提示", {

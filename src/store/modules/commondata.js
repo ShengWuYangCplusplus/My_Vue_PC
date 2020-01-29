@@ -3,7 +3,6 @@ import { getDepartmentList, getRoleList } from '@/request/allApi.js'
 export default {
   namespaced: true,
   state: {
-    userName: 'iiii',
     roleList: [],
     departmentList: []
   },

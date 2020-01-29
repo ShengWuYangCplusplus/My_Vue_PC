@@ -54,34 +54,11 @@ export default {
             align: "center"
           },
           {
-            prop: "UserName",
-            label: "员工姓名",
-            align: "center",
-            route: true,
-            method: (index, row) => {
-              this.handleDetail(index, row, 'a');
-            }
-          },
-          {
-            prop: "Phone",
-            label: "手机号",
-            align: "center",
-          },
-          {
-            prop: "department",
-            label: "部门",
-            align: "center",
-          },
-          {
             prop: "role",
             label: "角色",
             align: "center",
           },
-          {
-            prop: "Account",
-            label: "登录账号",
-            align: "center"
-          },
+      
         ],
         currentObj: {
           dataList: [],

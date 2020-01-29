@@ -1965,6 +1965,16 @@ const dynamicRoutes = [
               menuKey: 'system-users'
             }
           },
+          {
+            path: 'edit',
+            name: 'system-users-edit',
+            component: () => import('@/views/system/users/edit.vue'),
+            meta: {
+              required: false,
+              name: '编辑用户',
+              menuKey: 'system-users'
+            }
+          },
         ]
       },
       {

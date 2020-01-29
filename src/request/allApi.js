@@ -14,6 +14,12 @@ export const apis = {
     deleteUser(p) {
       return delone("/api/users", p)
     },
+    getUserDetail(p) {
+      return get('/api/users/detail', p)
+    },
+    updateUser(p) {
+      return put('/api/users', p)
+    }
   },
   Role: {
     getRoleList(p) {
