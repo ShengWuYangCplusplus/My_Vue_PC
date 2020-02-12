@@ -1,5 +1,5 @@
 <template>
-  <div style="width:100%;height:400px" :id="id" :option="option"></div>
+  <div style="width:100%;" :id="id" :option="option"></div>
 </template>
 <script>
 export default {
@@ -8,8 +8,8 @@ export default {
       type: String
     },
     option: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   data() {
     return {
@@ -35,10 +35,10 @@ export default {
       this.MyEcharts.clear();
       this.MyEcharts.setOption(this.option, true);
       let _this = this;
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         _this.MyEcharts.resize();
       });
-    },
+    }
   }
 };
 </script>

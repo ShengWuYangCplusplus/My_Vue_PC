@@ -56,7 +56,7 @@ export default {
   },
   data() {
     return {
-      building: '3号楼',
+      building: "3号楼",
       searchTagList: [],
       searchVisible: false,
       allTableObj: {
@@ -72,32 +72,32 @@ export default {
             prop: "a",
             label: "老人姓名",
             align: "center",
-            route:true
+            route: true
           },
           {
             prop: "b",
             label: "床位号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "身份证号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "d",
             label: "主要疾病",
-            align: "center",
+            align: "center"
           },
           {
             prop: "e",
             label: "入住开始时间",
-            align: "center",
+            align: "center"
           },
           {
             prop: "f",
             label: "是否完成登记",
-            align: "center",
+            align: "center"
           },
           {
             prop: "g",
@@ -105,71 +105,112 @@ export default {
             align: "center"
           },
           {
-            prop: 'h',
-            label: '赡养类型',
-            align: 'center',
+            prop: "h",
+            label: "赡养类型",
+            align: "center"
           },
           {
-            prop: 'i',
-            label: '经办人',
-            align: 'center',
+            prop: "i",
+            label: "经办人",
+            align: "center"
           },
           {
-            prop: 'j',
-            label: '办理时间',
-            align: 'center',
+            prop: "j",
+            label: "办理时间",
+            align: "center"
           },
           {
-            prop: 'k',
-            label: '是否外地迁入',
-            align: 'center',
+            prop: "k",
+            label: "是否外地迁入",
+            align: "center"
           }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '江桃',
-              b: 'B栋-101-01',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '已入院',
-              h: '家人抚养',
-              i: '管理员',
-              j: '2019-09-18 17:13:02',
-              k: '是',
+              a: "江桃",
+              b: "B栋-101-01",
+              c: "362322193501220348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "已入院",
+              h: "家人抚养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "是"
             },
             {
               num: 2,
-              a: '周贡',
-              b: 'B栋-101-01',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '已入院',
-              h: '家人抚养',
-              i: '管理员',
-              j: '2019-09-18 17:13:02',
-              k: '是',
+              a: "周贡",
+              b: "B栋-101-01",
+              c: "362322193501220348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "已入院",
+              h: "家人抚养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "是"
             },
             {
               num: 3,
-              a: '宋江',
-              b: 'C栋-101-01',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '已入院',
-              h: '家人抚养',
-              i: '管理员',
-              j: '2019-09-18 17:13:02',
-              k: '否',
+              a: "宋江",
+              b: "C栋-101-01",
+              c: "362322193501220348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "已入院",
+              h: "家人抚养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "否"
             },
-
+            {
+              num: 4,
+              a: "马国虎",
+              b: "C栋-101-03",
+              c: "362322193901220348",
+              d: "",
+              e: "2019-11-29",
+              f: "是",
+              g: "已入院",
+              h: "家人抚养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "否"
+            },
+            {
+              num: 5,
+              a: "周永福",
+              b: "B栋-101-01",
+              c: "362322194301220348",
+              d: "",
+              e: "2019-12-01",
+              f: "是",
+              g: "已入院",
+              h: "社会代养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "否"
+            },
+            {
+              num: 6,
+              a: "严迪",
+              b: "D栋-201-01",
+              c: "362322193601220348",
+              d: "",
+              e: "2019-12-01",
+              f: "是",
+              g: "已入院",
+              h: "家人抚养",
+              i: "管理员",
+              j: "2019-09-18 17:13:02",
+              k: "否"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -202,7 +243,7 @@ export default {
           btns: [
             {
               size: "mini",
-              text:"详情",
+              text: "详情",
               type: "text",
               style: "font-size:14px",
               disabled: false,
@@ -212,13 +253,13 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'residence-register-live-add' });
+      this.$router.push({ name: "residence-register-live-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -247,10 +288,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -258,7 +296,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -275,14 +313,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -290,8 +328,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -301,39 +339,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -345,9 +386,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -357,8 +401,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -369,7 +412,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

@@ -58,33 +58,33 @@ export default {
             align: "center",
             route: true,
             method: (index, row) => {
-              this.handleDetail(index, row, 'a');
+              this.handleDetail(index, row, "a");
             }
           },
           {
             prop: "b",
             label: "手机号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "身份证号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "d",
             label: "性别",
-            align: "center",
+            align: "center"
           },
           {
             prop: "e",
             label: "职位",
-            align: "center",
+            align: "center"
           },
           {
             prop: "f",
             label: "入职日期",
-            align: "center",
+            align: "center"
           },
           {
             prop: "g",
@@ -92,68 +92,68 @@ export default {
             align: "center"
           },
           {
-            prop: 'h',
-            label: '特长',
-            align: 'center',
-          },
+            prop: "h",
+            label: "特长",
+            align: "center"
+          }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
+              a: "谢娜",
+              b: "1872377942",
+              c: "362322197412013254",
+              d: "女",
+              e: "护理人员",
+              f: "2016-11-21",
+              g: "护理职业执照",
+              h: "心理辅导"
             },
             {
               num: 2,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
+              a: "李宇春",
+              b: "1872377942",
+              c: "362322197412013254",
+              d: "女",
+              e: "护理人员",
+              f: "2016-11-21",
+              g: "护理职业执照",
+              h: "心理辅导"
             },
             {
               num: 3,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
+              a: "赵春艳",
+              b: "1872377942",
+              c: "362322197412013254",
+              d: "女",
+              e: "护理人员",
+              f: "2016-11-21",
+              g: "护理职业执照",
+              h: "心理辅导"
             },
             {
               num: 4,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
+              a: "吴秀梅",
+              b: "19210229321",
+              c: "362322197412013254",
+              d: "女",
+              e: "护理人员",
+              f: "2016-09-27",
+              g: "护理职业执照",
+              h: "琴棋书画"
             },
             {
               num: 5,
-              a: '张三',
-              b: '1872377942',
-              c: '362322197412013254',
-              d: '女',
-              e: '护理人员',
-              f: '2016-11-21',
-              g: '护理职业执照',
-              h: '心理辅导',
-            },
+              a: "王达",
+              b: "1872377942",
+              c: "362322197412013254",
+              d: "男",
+              e: "门卫",
+              f: "2016-10-11",
+              g: "保安执照",
+              h: "擒拿术"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -187,7 +187,7 @@ export default {
             {
               size: "mini",
               type: "text",
-              text:'详情',
+              text: "详情",
               style: "font-size:14px",
               disabled: false,
               method: (index, row) => {
@@ -196,13 +196,13 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'institution-staff-add' });
+      this.$router.push({ name: "institution-staff-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -231,10 +231,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -242,7 +239,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -259,14 +256,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -274,8 +271,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -285,39 +282,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -329,9 +329,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -341,8 +344,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -353,7 +355,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

@@ -55,88 +55,88 @@ export default {
             align: "center",
             route: true,
             method: (index, row) => {
-              this.handleDetail(index, row, 'a');
+              this.handleDetail(index, row, "a");
             }
           },
           {
             prop: "b",
             label: "定位类型",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "定位地址",
-            align: "center",
+            align: "center"
           },
           {
             prop: "d",
             label: "获取定位时间",
-            align: "center",
+            align: "center"
           },
           {
             prop: "e",
             label: "详细经纬度",
-            align: "center",
-          },
+            align: "center"
+          }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "王汉县",
+              b: "腕表定位",
+              c: "D栋201",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "杨国福",
+              b: "腕表定位",
+              c: "D栋201",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "曹德旺",
+              b: "腕表定位",
+              c: "B栋101",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "吴登洪",
+              b: "腕表定位",
+              c: "C栋201",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "桑志刚",
+              b: "腕表定位",
+              c: "B栋509",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
+              a: "刘秀峰",
+              b: "摄像头定位",
+              c: "A栋402",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
             },
             {
               num: 1,
-              a: '王汉县',
-              b: '离床报警',
-              c: '',
-              d: '2019-08-21 22:34:01',
-              e: '116.32569,24.230942',
-            },
+              a: "张磊",
+              b: "红外线定位",
+              c: "D栋201",
+              d: "2019-08-21 22:34:01",
+              e: "116.32569,24.230942"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -172,20 +172,20 @@ export default {
               type: "text",
               style: "font-size:14px",
               disabled: false,
-              text: '详情',
+              text: "详情",
               method: (index, row) => {
                 this.handleDetail(index, row);
               }
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'residence-register-live-add' });
+      this.$router.push({ name: "residence-register-live-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -214,10 +214,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -225,7 +222,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -242,14 +239,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -257,8 +254,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -268,39 +265,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -312,9 +312,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -324,8 +327,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -336,7 +338,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

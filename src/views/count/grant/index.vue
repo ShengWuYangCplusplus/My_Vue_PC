@@ -1,21 +1,12 @@
 <template>
   <div class="outDiv">
-    <div class="searchBar">
-      <div class="searchLeft">
-        <el-popover placement="right-bottom" title="条件检索" trigger="click" v-model="searchVisible">
-          <searchForm @startSearch="handleTableSearch" @cancleSearch="handleCancleSeach"></searchForm>
-          <el-button slot="reference" size="mini">按条件筛选</el-button>
-        </el-popover>
-        <navTopTag :searchTagList="searchTagList" @handleDelOne="handleDelOne"></navTopTag>
+    <div style="display:flex;flex-fow:row">
+      <div style="flex:3;">
+        <Echart :id="'grantChart'" class="chart-content" :option="grantOption"></Echart>
       </div>
-    </div>
-    <div>
-      <el-tabs v-model="allTableObj.currentTab" @tab-click="tabClick($event)">
-        <el-tab-pane label="所有数据" name="all"></el-tab-pane>
-        <el-tab-pane label="搜索结果" name="search"></el-tab-pane>
-      </el-tabs>
-      <div>
+      <div style="flex:2">
         <BaseTable
+          :headFunc="headFunc"
           :columns="allTableObj.columns"
           :currentObj="allTableObj.currentObj"
           :showPage="allTableObj.showPage"
@@ -27,90 +18,75 @@
         ></BaseTable>
       </div>
     </div>
+    <div style="display:flex;flex-flow:row">
+      <div style="flex:1">
+        <Echart :id="'trendChart'" class="chart-content" :option="trendOption"></Echart>
+      </div>
+      <div style="flex:1">
+        <Echart :id="'typeChart'" class="chart-content" :option="typeOption"></Echart>
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
-import searchForm from "./list-search";
 export default {
-  inject: ["reload"],
-  components: {
-    searchForm
-  },
   data() {
     return {
+      headFunc: ({ row, column, rowIndex, columnIndex }) => {
+        if (rowIndex == 0) {
+          return "background:	#fff;color:black;font-size:14px;font-weight:bold;opacity:0.9;padding:6px";
+        } else {
+          return "";
+        }
+      },
+      trendOption: {},
+      grantOption: {},
+      typeOption: {},
       searchTagList: [],
       searchVisible: false,
       allTableObj: {
-        showPage: true,
+        showPage: false,
         columns: [
           {
-            prop: "num",
-            label: "#",
-            width: "50px",
+            prop: "a",
+            label: "统计时间",
             align: "center"
           },
           {
-            prop: "theOldNameA",
-            label: "老人姓名",
-            align: "center",
-            route: true,
-            method: (index, row) => {
-              this.handleDetail(index, row, 'a');
-            }
-          },
-          {
-            prop: "theOldIdCardA",
-            label: "床位号",
-            align: "center",
-          },
-          {
-            prop: "theOldTypeA",
-            label: "身份证号",
-            align: "center",
-          },
-          {
-            prop: "theOldNameB",
-            label: "主要疾病",
-            align: "center",
-          },
-          {
-            prop: "theOldIdCardB",
-            label: "入住开始时间",
-            align: "center",
-          },
-          {
-            prop: "theOldTypeB",
-            label: "是否完成登记",
-            align: "center",
-          },
-          {
-            prop: "mainTheOldName",
-            label: "入院状态",
+            prop: "b",
+            label: "老人类型",
             align: "center"
           },
           {
-            prop: '',
-            label: '赡养类型',
-            align: 'center',
-          },
-          {
-            prop: '',
-            label: '经办人',
-            align: 'center',
-          },
-          {
-            prop: '',
-            label: '办理时间',
-            align: 'center',
-          },
-          {
-            prop: '',
-            label: '是否外地迁入',
-            align: 'center',
+            prop: "c",
+            label: "金额",
+            align: "center"
           }
         ],
         currentObj: {
-          dataList: [],
+          dataList: [
+            {
+              a: "2019",
+              b: "A类老人",
+              c: "522347"
+            },
+            {
+              a: "2019",
+              b: "B类老人",
+              c: "821346"
+            },
+            {
+              a: "2019",
+              b: "C类老人",
+              c: "165271"
+            },
+            {
+              a: "2019",
+              b: "D类老人",
+              c: "25879"
+            }
+          ],
           currentPage: 1,
           pageSize: 20,
           total: 0
@@ -142,9 +118,9 @@ export default {
           btns: [
             {
               size: "mini",
-              icon: "el-icon-tickets",
               type: "text",
-              style: "font-size:16px",
+              text: "详情",
+              style: "font-size:14px",
               disabled: false,
               method: (index, row) => {
                 this.handleDetail(index, row);
@@ -152,169 +128,141 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
-    add() {
-      this.$router.push({ name: 'institution-staff-add' });
-    },
-    handleTableSearch(i) {
-      this.searchVisible = i.searchShow;
-      this.searchTagList = this.$searchTag.getTagList(
-        this.$searchNameList.getSameOldSearch(),
-        i.searchData
-      );
-      this.$store.commit("setSearchForm", i.searchData);
-      this.allTableObj.currentTab = "search";
-      const reqObj = {
-        index: 0,
-        size: 20,
-        ...i.searchData
-      };
-      this.loadData(reqObj);
-    },
-    handleCancleSeach(i) {
-      this.searchVisible = i.searchShow;
-    },
-    handleDelOne(i) {
-      //减少一个检索条件时
-      this.searchTagList = this.searchTagList.filter((item, index) => {
-        if (item[0] === i[0]) {
-          return false;
-        } else {
-          return true;
-        }
-      });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
-      if (this.$baseFunc.paramsValidate(obj)) {
-        this.allTableObj.searchDataNow.dataList = [];
-        this.allTableObj.searchDataNow.currentPage = 1;
-        this.allTableObj.searchDataNow.pageSize = 20;
-        this.allTableObj.searchDataNow.total = 0;
-        this.allTableObj.currentTab = "all";
-        this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
-        this.$nextTick(() => {
-          this.allTableObj.showPage = true;
-        });
-      } else {
-        const reqObj = {
-          index: 0,
-          size: 20,
-          ...obj
-        };
-        this.loadData(reqObj);
-      }
-      this.$store.commit("setSearchForm", obj);
-    },
-    tabClick(i) {
-      if (i.name == "all") {
-        this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
-        this.$nextTick().then(() => {
-          this.allTableObj.showPage = true;
-        });
-      }
-      if (i.name == "search") {
-        this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
-        this.$nextTick().then(() => {
-          this.allTableObj.showPage = true;
-        });
-      }
-    },
-    loadData(reqObj) {
-      this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
-          if (res.code === 0) {
-            const temp = {
-              dataList: res.data.map((item, idx) => ({
-                num: res.index * res.size + idx + 1,
-                ...item
-              })),
-              currentPage: res.index + 1,
-              total: res.total,
-              pageSize: res.size
+    draw() {
+      this.trendOption = {
+        title: {
+          text: "补贴消费统计",
+          subtext: "2019年度",
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+        },
+        series: [
+          {
+            name: "消费金额",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+              { value: 335, name: "床位费" },
+              { value: 310, name: "护理费" },
+              { value: 234, name: "餐食费" },
+              { value: 135, name: "卫生费" },
+              { value: 1548, name: "其他" }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              }
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
-            }
-          } else {
-            this.$message.error(`获取数据失败${res.des}`)
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
-    },
-    //每次页面码数变了 要变回第一页
-    handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
-      }
-      let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
-        this.allTableObj.allDataNow.currentPage = 1;
-        this.allTableObj.allDataNow.pageSize = i;
-        reqObj = {
-          index: 0,
-          size: i
-        };
-      }
-      else if (tab === 'search') {
-        this.allTableObj.searchDataNow.currentPage = 1;
-        this.allTableObj.searchDataNow.pageSize = i;
-        reqObj = {
-          index: 0,
-          size: i,
-          ...this.currentSearchForm
-        };
-      }
-      this.loadData(reqObj);
-    },
-    handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
-      }
-      let reqObj = {};
-      let tab = this.allTableObj.currentTab;
-      if (tab == "all") {
-        this.allTableObj.allDataNow.currentPage = i;
-        reqObj = {
-          index: i - 1,
-          size: this.allTableObj.allDataNow.pageSize
-        };
-      }
-      else if (flag == "search") {
-        this.allTableObj.searchDataNow.currentPage = i;
-        reqObj = {
-          index: i - 1,
-          size: this.allTableObj.searchDataNow.pageSize,
-          ...this.currentSearchForm
-        };
-      }
-      this.loadData(reqObj);
-    },
-    handleDetail(i, j) {
-      console.log(i, j)
+        ]
+      };
+      this.grantOption = {
+        title: {
+          text: "补贴发放统计",
+          subtext: "2019年度",
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          left: "left",
+          data: ["A类老人", "B类老人", "C类老人", "D类老人"]
+        },
+        series: [
+          {
+            name: "发放金额",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "60%"],
+            data: [
+              { value: 335, name: "A类老人" },
+              { value: 310, name: "B类老人" },
+              { value: 234, name: "C类老人" },
+              { value: 135, name: "D类老人" }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              }
+            }
+          }
+        ]
+      };
+      this.typeOption = {
+        title: {
+          text: "补贴类型统计",
+          subtext: "2019年度",
+          left: "center"
+        },
+        tooltip: {
+          trigger: "item",
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
+        },
+        legend: {
+          orient: "vertical",
+          left: 10,
+          data: ["政府补贴", "爱心午餐", "孝善基金"]
+        },
+        series: [
+          {
+            name: "补贴类型",
+            type: "pie",
+            radius: ["50%", "70%"],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                show: false,
+                position: "center"
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: "30",
+                  fontWeight: "bold"
+                }
+              }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data: [
+              { value: 335, name: "政府补贴" },
+              { value: 310, name: "爱心午餐" },
+              { value: 234, name: "孝善基金" }
+            ]
+          }
+        ]
+      };
     }
   },
   mounted() {
-    // this.loadData({ index: 0, size: 20 })
+    this.draw();
   }
 };
 </script>
 
+<style>
+</style>

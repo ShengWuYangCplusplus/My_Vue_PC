@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <div>
+    <h5>条件检索</h5>
+  </div>
 </template>
 
 <script>

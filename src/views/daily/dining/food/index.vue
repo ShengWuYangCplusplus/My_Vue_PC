@@ -53,39 +53,57 @@ export default {
             prop: "a",
             label: "名称",
             align: "center",
-            route:true
+            route: true
           },
           {
             prop: "b",
             label: "价格(元)",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "类型",
-            align: "center",
-          },
+            align: "center"
+          }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '农家小炒肉',
-              b: '26',
-              c: '湘菜',
+              a: "农家小炒肉",
+              b: "26",
+              c: "湘菜"
             },
             {
-              num: 1,
-              a: '西红柿鸡蛋',
-              b: '16',
-              c: '川菜',
+              num: 2,
+              a: "西红柿鸡蛋",
+              b: "16",
+              c: "川菜"
             },
             {
-              num: 1,
-              a: '红烧鱼',
-              b: '24',
-              c: '粤菜',
+              num: 3,
+              a: "红烧鱼",
+              b: "24",
+              c: "湘菜"
             },
+            {
+              num: 4,
+              a: "冬瓜排骨汤",
+              b: "32",
+              c: "赣菜"
+            },
+            {
+              num: 5,
+              a: "豆角扁肉",
+              b: "26",
+              c: "川菜"
+            },
+            {
+              num: 6,
+              a: "爆炒花蛤",
+              b: "24",
+              c: "浙菜"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -119,7 +137,7 @@ export default {
             {
               size: "mini",
               type: "text",
-              text:"详情",
+              text: "详情",
               style: "font-size:14px",
               disabled: false,
               method: (index, row) => {
@@ -128,13 +146,13 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'residence-register-live-add' });
+      this.$router.push({ name: "residence-register-live-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -163,10 +181,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -174,7 +189,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -191,14 +206,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -206,8 +221,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -217,39 +232,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -261,9 +279,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -273,8 +294,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -285,7 +305,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

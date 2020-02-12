@@ -58,33 +58,33 @@ export default {
             align: "center",
             route: true,
             method: (index, row) => {
-              this.handleDetail(index, row, 'a');
+              this.handleDetail(index, row, "a");
             }
           },
           {
             prop: "b",
             label: "床位号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "身份证号",
-            align: "center",
+            align: "center"
           },
           {
             prop: "d",
             label: "主要疾病",
-            align: "center",
+            align: "center"
           },
           {
             prop: "e",
             label: "入住开始时间",
-            align: "center",
+            align: "center"
           },
           {
             prop: "f",
             label: "是否完成登记",
-            align: "center",
+            align: "center"
           },
           {
             prop: "g",
@@ -92,67 +92,106 @@ export default {
             align: "center"
           },
           {
-            prop: 'g',
-            label: '赡养类型',
-            align: 'center',
+            prop: "g",
+            label: "赡养类型",
+            align: "center"
           },
           {
-            prop: 'h',
-            label: '经办人',
-            align: 'center',
+            prop: "h",
+            label: "经办人",
+            align: "center"
           },
           {
-            prop: 'i',
-            label: '办理时间',
-            align: 'center',
+            prop: "i",
+            label: "办理时间",
+            align: "center"
           },
           {
-            prop: 'j',
-            label: '是否外地迁入',
-            align: 'center',
+            prop: "j",
+            label: "是否外地迁入",
+            align: "center"
           }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '陈义初',
-              b: 'B栋-101-01',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '社会代养',
-              h: '管理员',
-              i: '2019-09-18 17:13:02',
-              j: '否',
+              a: "陈义初",
+              b: "B栋-101-01",
+              c: "362322193501220348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "社会代养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "否"
             },
             {
               num: 2,
-              a: '赵明亮',
-              b: 'C栋-101-05',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '社会代养',
-              h: '管理员',
-              i: '2019-09-18 17:13:02',
-              j: '否',
+              a: "赵明亮",
+              b: "C栋-101-05",
+              c: "362322193501220348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "社会代养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "否"
             },
             {
               num: 3,
-              a: '王新村',
-              b: 'A栋-109-07',
-              c: '362322193501220348',
-              d: '',
-              e: '2019-11-23',
-              f: '是',
-              g: '社会代养',
-              h: '管理员',
-              i: '2019-09-18 17:13:02',
-              j: '否',
+              a: "王新村",
+              b: "A栋-109-07",
+              c: "362322193501224818",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "子女赡养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "是"
             },
+            {
+              num: 4,
+              a: "周永福",
+              b: "B栋-209-07",
+              c: "362322193501224832",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "社会代养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "否"
+            },
+            {
+              num: 5,
+              a: "严迪",
+              b: "C栋-103-02",
+              c: "362322193709030383",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "子女赡养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "否"
+            },
+            {
+              num: 6,
+              a: "马国虎",
+              b: "D栋-101-03",
+              c: "362322194501120348",
+              d: "",
+              e: "2019-11-23",
+              f: "是",
+              g: "社会代养",
+              h: "管理员",
+              i: "2019-09-18 17:13:02",
+              j: "否"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -187,7 +226,7 @@ export default {
               size: "mini",
               icon: "el-icon-tickets",
               type: "text",
-              style: "font-size:16px",
+              style: "font-size:14px;",
               disabled: false,
               method: (index, row) => {
                 this.handleDetail(index, row);
@@ -195,13 +234,13 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'residence-register-live-add' });
+      this.$router.push({ name: "residence-register-live-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -230,10 +269,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -241,7 +277,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -258,14 +294,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -273,8 +309,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -284,39 +320,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -328,9 +367,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -340,8 +382,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -352,7 +393,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

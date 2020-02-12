@@ -55,89 +55,89 @@ export default {
           {
             prop: "a",
             label: "床位类型",
-            align: "center",
+            align: "center"
           },
           {
             prop: "b",
             label: "床位描述",
-            align: "center",
+            align: "center"
           },
           {
             prop: "c",
             label: "床位月价格",
-            align: "center",
+            align: "center"
           },
           {
             prop: "d",
             label: "包房费用",
-            align: "center",
-          },
+            align: "center"
+          }
         ],
         currentObj: {
           dataList: [
             {
               num: 1,
-              a: '套件',
-              b: '',
-              c: '200',
-              d: '',
+              a: "套件",
+              b: "",
+              c: "200",
+              d: ""
             },
             {
               num: 2,
-              a: '单人间2',
-              b: '',
-              c: '200',
-              d: '',
+              a: "单人间2",
+              b: "",
+              c: "200",
+              d: ""
             },
             {
               num: 3,
-              a: '豪华间',
-              b: '',
-              c: '200',
-              d: '',
+              a: "豪华间",
+              b: "",
+              c: "200",
+              d: ""
             },
             {
               num: 4,
-              a: '单人间',
-              b: '',
-              c: '800',
-              d: '700',
+              a: "单人间",
+              b: "",
+              c: "800",
+              d: "700"
             },
             {
               num: 5,
-              a: '多人床',
-              b: '',
-              c: '100',
-              d: '80',
+              a: "多人床",
+              b: "",
+              c: "100",
+              d: "80"
             },
             {
               num: 6,
-              a: '五人间',
-              b: '',
-              c: '200',
-              d: '150',
+              a: "五人间",
+              b: "",
+              c: "200",
+              d: "150"
             },
             {
               num: 7,
-              a: '四人间',
-              b: '',
-              c: '300',
-              d: '280',
+              a: "四人间",
+              b: "",
+              c: "300",
+              d: "280"
             },
             {
               num: 8,
-              a: '三人间',
-              b: '',
-              c: '400',
-              d: '350',
+              a: "三人间",
+              b: "",
+              c: "400",
+              d: "350"
             },
             {
               num: 9,
-              a: '双人间',
-              b: '',
-              c: '600',
-              d: '550',
-            },
+              a: "双人间",
+              b: "",
+              c: "600",
+              d: "550"
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -171,8 +171,8 @@ export default {
             {
               size: "mini",
               type: "text",
-              text:'详情',
-              style: "font-size:14px",
+              text: "详情",
+              style: "font-size:14px;",
               disabled: false,
               method: (index, row) => {
                 this.handleDetail(index, row);
@@ -181,7 +181,7 @@ export default {
             {
               size: "mini",
               type: "text",
-              text:'编辑',
+              text: "编辑",
               style: "font-size:14px",
               disabled: false,
               method: (index, row) => {
@@ -190,13 +190,13 @@ export default {
             }
           ]
         },
-        currentTab: "all",
+        currentTab: "all"
       }
     };
   },
   methods: {
     add() {
-      this.$router.push({ name: 'institution-beds-type-add' });
+      this.$router.push({ name: "institution-beds-type-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
@@ -225,10 +225,7 @@ export default {
           return true;
         }
       });
-      const obj = this.$searchTag.deleteOneSearch(
-        i[0],
-        this.currentSearchForm
-      );
+      const obj = this.$searchTag.deleteOneSearch(i[0], this.currentSearchForm);
       if (this.$baseFunc.paramsValidate(obj)) {
         this.allTableObj.searchDataNow.dataList = [];
         this.allTableObj.searchDataNow.currentPage = 1;
@@ -236,7 +233,7 @@ export default {
         this.allTableObj.searchDataNow.total = 0;
         this.allTableObj.currentTab = "all";
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick(() => {
           this.allTableObj.showPage = true;
         });
@@ -253,14 +250,14 @@ export default {
     tabClick(i) {
       if (i.name == "all") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.allDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
       }
       if (i.name == "search") {
         this.allTableObj.showPage = false;
-        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow }
+        this.allTableObj.currentObj = { ...this.allTableObj.searchDataNow };
         this.$nextTick().then(() => {
           this.allTableObj.showPage = true;
         });
@@ -268,8 +265,8 @@ export default {
     },
     loadData(reqObj) {
       this.allTableObj.loadObj.isLoading = true;
-      getSameHouseOldersApi(reqObj).then(
-        res => {
+      getSameHouseOldersApi(reqObj)
+        .then(res => {
           if (res.code === 0) {
             const temp = {
               dataList: res.data.map((item, idx) => ({
@@ -279,39 +276,42 @@ export default {
               currentPage: res.index + 1,
               total: res.total,
               pageSize: res.size
+            };
+            this.allTableObj.currentObj = { ...temp };
+            if (this.allTableObj.currentTab === "all") {
+              this.allTableObj.allDataNow = { ...temp };
             }
-            this.allTableObj.currentObj = { ...temp }
-            if (this.allTableObj.currentTab === 'all') {
-              this.allTableObj.allDataNow = { ...temp }
-            }
-            if (this.allTableObj.currentTab === 'search') {
-              this.allTableObj.searchDataNow = { ...temp }
+            if (this.allTableObj.currentTab === "search") {
+              this.allTableObj.searchDataNow = { ...temp };
             }
           } else {
-            this.$message.error(`获取数据失败${res.des}`)
+            this.$message.error(`获取数据失败${res.des}`);
           }
-        }
-      ).catch(() => { }).finally(() => {
-        this.allTableObj.loadObj.isLoading = false
-      })
+        })
+        .catch(() => {})
+        .finally(() => {
+          this.allTableObj.loadObj.isLoading = false;
+        });
     },
     //每次页面码数变了 要变回第一页
     handleSizeChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return false
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return false;
       }
       let reqObj = {};
-      let tab = this.allTableObj.currentTab
-      if (tab === 'all') {
+      let tab = this.allTableObj.currentTab;
+      if (tab === "all") {
         this.allTableObj.allDataNow.currentPage = 1;
         this.allTableObj.allDataNow.pageSize = i;
         reqObj = {
           index: 0,
           size: i
         };
-      }
-      else if (tab === 'search') {
+      } else if (tab === "search") {
         this.allTableObj.searchDataNow.currentPage = 1;
         this.allTableObj.searchDataNow.pageSize = i;
         reqObj = {
@@ -323,9 +323,12 @@ export default {
       this.loadData(reqObj);
     },
     handleCurrentChange(i) {
-      if (this.$baseFunc.isEmptyObj(this.currentSearchForm) && this.allTableObj.currentTab === 'search') {
-        this.$message.error('检索条件不能为空')
-        return
+      if (
+        this.$baseFunc.isEmptyObj(this.currentSearchForm) &&
+        this.allTableObj.currentTab === "search"
+      ) {
+        this.$message.error("检索条件不能为空");
+        return;
       }
       let reqObj = {};
       let tab = this.allTableObj.currentTab;
@@ -335,8 +338,7 @@ export default {
           index: i - 1,
           size: this.allTableObj.allDataNow.pageSize
         };
-      }
-      else if (flag == "search") {
+      } else if (flag == "search") {
         this.allTableObj.searchDataNow.currentPage = i;
         reqObj = {
           index: i - 1,
@@ -347,7 +349,7 @@ export default {
       this.loadData(reqObj);
     },
     handleDetail(i, j) {
-      console.log(i, j)
+      console.log(i, j);
     }
   },
   mounted() {

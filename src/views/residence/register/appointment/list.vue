@@ -8,6 +8,9 @@
         </el-popover>
         <navTopTag :searchTagList="searchTagList" @handleDelOne="handleDelOne"></navTopTag>
       </div>
+      <div>
+        <el-button size="mini" type="primary" @click="add">添加预约登记</el-button>
+      </div>
     </div>
     <div>
       <el-tabs v-model="allTableObj.currentTab" @tab-click="tabClick($event)">
@@ -38,7 +41,6 @@ export default {
   },
   data() {
     return {
-      building: "3号楼",
       searchTagList: [],
       searchVisible: false,
       allTableObj: {
@@ -52,43 +54,32 @@ export default {
           },
           {
             prop: "a",
-            label: "老人姓名",
-            align: "center",
-            route: true
+            label: "预约时间",
+            align: "center"
           },
           {
             prop: "b",
-            label: "身份证号",
+            label: "预约老人",
             align: "center"
           },
           {
             prop: "c",
-            label: "入院日期",
+            label: "电话",
             align: "center"
           },
           {
             prop: "d",
-            label: "出院日期",
+            label: "办理人",
             align: "center"
           },
           {
             prop: "e",
-            label: "出院形式",
+            label: "预约结果",
             align: "center"
           },
           {
             prop: "f",
-            label: "出院原因",
-            align: "center"
-          },
-          {
-            prop: "g",
-            label: "登记人",
-            align: "center"
-          },
-          {
-            prop: "h",
-            label: "登记时间",
+            label: "备注",
             align: "center"
           }
         ],
@@ -96,69 +87,48 @@ export default {
           dataList: [
             {
               num: 1,
-              a: "罗志成",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人出院探亲",
-              g: "管理员",
-              h: "2019-05-08"
+              a: "2019-12-03 13:33:34",
+              b: "刘邦强",
+              c: "18612357140",
+              d: "管理员",
+              e: "处理中",
+              f: "xxxxx"
             },
             {
               num: 2,
-              a: "沈佳怡",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人参加活动",
-              g: "管理员",
-              h: "2019-07-31"
+              a: "2019-8-23 14:23:36",
+              b: "何喜庆",
+              c: "18612357987",
+              d: "管理员",
+              e: "已预约",
+              f: "xxxxx"
             },
             {
               num: 3,
-              a: "赵建国",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人出院探亲",
-              g: "管理员",
-              h: "2019-08-22"
+              a: "2019-07-22 13:33:34",
+              b: "刘邦强",
+              c: "18612357140",
+              d: "管理员",
+              e: "已预约",
+              f: "xxxxx"
             },
             {
               num: 4,
-              a: "吴登洪",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人去医院",
-              g: "管理员",
-              h: "2019-06-19"
+              a: "2019-02-12 09:52:08",
+              b: "刘诗诗",
+              c: "17712357122",
+              d: "保安",
+              e: "已预约",
+              f: "xxxxx"
             },
             {
               num: 5,
-              a: "郑家福",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人出院探亲",
-              g: "管理员",
-              h: "2019-07-31"
-            },
-            {
-              num: 6,
-              a: "谢东英",
-              b: "362322193501220348",
-              c: "2018-10-29",
-              d: "2019-7-21",
-              e: "出院",
-              f: "老人看病体检",
-              g: "管理员",
-              h: "2019-11-28"
+              a: "2019-04-27 10:18:48",
+              b: "杨洋",
+              c: "17840227140",
+              d: "保安",
+              e: "处理中",
+              f: "xxxxx"
             }
           ],
           currentPage: 1,
@@ -186,15 +156,15 @@ export default {
           total: 0
         },
         operationColumn: {
-          show: false,
+          show: true,
           align: "center",
           width: "200px",
           btns: [
             {
               size: "mini",
-              icon: "el-icon-tickets",
               type: "text",
-              style: "font-size:16px",
+              text: "详情",
+              style: "font-size:14px;",
               disabled: false,
               method: (index, row) => {
                 this.handleDetail(index, row);
@@ -208,7 +178,7 @@ export default {
   },
   methods: {
     add() {
-      this.$router.push({ name: "residence-register-live-add" });
+      this.$router.push({ name: "residence-register-appointment-add" });
     },
     handleTableSearch(i) {
       this.searchVisible = i.searchShow;
