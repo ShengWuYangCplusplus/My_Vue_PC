@@ -1,6 +1,6 @@
 <template>
   <div class="outDiv">
-    <div></div>
+   <TopCount />
     <div>
       <div style="display:flex;flex-flow:row">
         <el-card style="flex:1;margin:10px">
@@ -82,7 +82,11 @@
   </div>
 </template>
 <script>
+import TopCount from './topCount.vue'
 export default {
+  components:{
+    TopCount
+  },
   data() {
     return {
       headFunc: ({ row, column, rowIndex, columnIndex }) => {
@@ -142,7 +146,7 @@ export default {
               b: "36",
               c: "3",
               d: "1"
-            },
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -230,7 +234,7 @@ export default {
               b: "36",
               c: "3",
               d: "1"
-            },
+            }
           ],
           currentPage: 1,
           pageSize: 20,
@@ -280,32 +284,30 @@ export default {
   methods: {
     draw() {
       this.optionOne = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
-        legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
-        },
+        // legend: {
+        //   orient: "vertical",
+        //   left: "left",
+        //   data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+        // },
         series: [
           {
             name: "消费金额",
             type: "pie",
             radius: "55%",
-            center: ["50%", "60%"],
+            center: ["50%", "50%"],
             data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
+              { value: 335, name: "入住" },
+              { value: 310, name: "试住" },
+              { value: 234, name: "转院" },
+              { value: 135, name: "出院" },
+              { value: 1548, name: "咨询" },
+              { value: 1548, name: "预约" },
+              { value: 1548, name: "待入住" },
+              { value: 1548, name: "待试住" },
             ],
             emphasis: {
               itemStyle: {
@@ -318,69 +320,81 @@ export default {
         ]
       };
       this.optionTwo = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          trigger: "axis"
         },
         legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+          data: ["试住", "入住", "出院"]
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: [
+            "2017-10",
+            "2017-11",
+            "2017-12",
+            "2018-01",
+            "2018-02",
+            "2018-03",
+            "2018-04"
+          ]
+        },
+        yAxis: {
+          type: "value"
         },
         series: [
           {
-            name: "消费金额",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
+            name: "试住",
+            type: "line",
+            stack: "总量",
+            data: [120, 132, 101, 134, 90, 230, 210]
+          },
+          {
+            name: "入住",
+            type: "line",
+            stack: "总量",
+            data: [220, 182, 191, 234, 290, 330, 310]
+          },
+          {
+            name: "出院",
+            type: "line",
+            stack: "总量",
+            data: [150, 232, 201, 154, 190, 330, 410]
           }
         ]
       };
       this.optionThree = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
           trigger: "item",
           formatter: "{a} <br/>{b} : {c} ({d}%)"
         },
-        legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
-        },
+        // legend: {
+        //   orient: "vertical",
+        //   left: "left",
+        //   data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+        // },
         series: [
           {
             name: "消费金额",
             type: "pie",
             radius: "55%",
-            center: ["50%", "60%"],
+            center: ["50%", "50%"],
             data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
+              { value: 335, name: "行政人员" },
+              { value: 310, name: "医务人员" },
+              { value: 234, name: "后勤人员" },
+              { value: 135, name: "护理人员" },
               { value: 1548, name: "其他" }
             ],
             emphasis: {
@@ -394,157 +408,217 @@ export default {
         ]
       };
       this.optionFour = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow" // 默认为直线，可选为：'line' | 'shadow'
+          }
         },
-        legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+        // legend: {
+        //   data: [
+        //     "直接访问",
+        //     "邮件营销",
+        //     "联盟广告",
+        //     "视频广告",
+        //     "搜索引擎",
+        //     "百度",
+        //     "谷歌",
+        //     "必应",
+        //     "其他"
+        //   ]
+        // },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
         },
+        xAxis: [
+          {
+            type: "category",
+            data: ["护理小分队", "快乐家族", "第二小组", "青春组", "测试"]
+          }
+        ],
+        yAxis: [
+          {
+            type: "value"
+          }
+        ],
         series: [
           {
-            name: "消费金额",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
+            name: "护理小分队",
+            type: "bar",
+            data: [320, 332, 301, 334, 390]
+          },
+          {
+            name: "快乐家族",
+            type: "bar",
+
+            data: [120, 132, 101, 134, 90]
+          },
+          {
+            name: "第二小组",
+            type: "bar",
+
+            data: [220, 182, 191, 234, 290]
+          },
+          {
+            name: "青春组",
+            type: "bar",
+
+            data: [150, 232, 201, 154, 190]
+          },
+          {
+            name: "测试",
+            type: "bar",
+            data: [862, 1018, 964, 1026, 1679],
+            markLine: {
+              lineStyle: {
+                type: "dashed"
+              },
+              data: [[{ type: "min" }, { type: "max" }]]
             }
           }
         ]
       };
       this.optionFive = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          formatter: "{a} <br/>{b}: {c} ({d}%)"
         },
         legend: {
           orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+          left: 10,
+          data: ["已入住", "待入住", "空闲"]
         },
         series: [
           {
-            name: "消费金额",
+            name: "床位统计",
             type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
+            radius: ["50%", "70%"],
+            avoidLabelOverlap: false,
+            label: {
+              normal: {
+                show: false,
+                position: "center"
+              },
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontSize: "30",
+                  fontWeight: "bold"
+                }
               }
-            }
+            },
+            labelLine: {
+              normal: {
+                show: false
+              }
+            },
+            data: [
+              { value: 335, name: "已入住" },
+              { value: 310, name: "待入住" },
+              { value: 234, name: "空闲" },
+            ]
           }
         ]
       };
       this.optionSix = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
         tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
+          trigger: "axis"
         },
         legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
+          data: ["试住", "待入住", "空闲"]
+        },
+        grid: {
+          left: "3%",
+          right: "4%",
+          bottom: "3%",
+          containLabel: true
+        },
+        toolbox: {
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: [
+            "2017-10",
+            "2017-11",
+            "2017-12",
+            "2018-01",
+            "2018-02",
+            "2018-03",
+            "2018-04"
+          ]
+        },
+        yAxis: {
+          type: "value"
         },
         series: [
           {
-            name: "消费金额",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
-          }
-        ]
-      };
-      this.optionSeven = {
-        title: {
-          text: "补贴消费统计",
-          subtext: "2019年度",
-          left: "center"
-        },
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-          orient: "vertical",
-          left: "left",
-          data: ["床位费", "护理费", "餐食费", "卫生费", "其他"]
-        },
-        series: [
+            name: "试住",
+            type: "line",
+            stack: "总量",
+            data: [56, 88, 101, 134, 60, 35, 66]
+          },
           {
-            name: "消费金额",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "床位费" },
-              { value: 310, name: "护理费" },
-              { value: 234, name: "餐食费" },
-              { value: 135, name: "卫生费" },
-              { value: 1548, name: "其他" }
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
+            name: "待入住",
+            type: "line",
+            stack: "总量",
+            data: [220, 182, 21, 33, 290, 330, 310]
+          },
+          {
+            name: "空闲",
+            type: "line",
+            stack: "总量",
+            data: [65, 138, 201, 113, 190, 185, 102]
           }
         ]
       };
+      this.optionSeven={
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data: ['入住率']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['2017-10', '2017-11', '2017-12', '2018-01', '2018-02', '2018-03', 
+        '2018-04',
+        '2018-05',
+        '2018-06',
+        '2018-07',
+        '2018-08',
+        ]
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name: '入住率',
+            type: 'line',
+            stack: '总量',
+            data: [13, 22, 33, 44, 66, 88, 82,80,77,92,84]
+        },
+    ]
+      }
     }
   },
   mounted() {
