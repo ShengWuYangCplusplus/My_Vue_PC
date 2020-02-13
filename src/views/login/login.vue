@@ -3,7 +3,7 @@
     <div class="login_header">
       <div class="titleLeft">
         <span>
-          <i class="icon iconfont icon-icon-mzsq titleIcon"></i>
+          <i class="icon iconfont icon-zan titleIcon"></i>
         </span>
         <span class="titleFont">{{systemTitle}}</span>
       </div>
@@ -50,8 +50,8 @@
 <script>
 import { get, post } from "../../config/httpConfig";
 import { constants } from "crypto";
-import { setCookie, getCookie, delCookie } from "@/utils/cookie.js";
-import MenuRoute from "@/config/menu_route.js";
+import { setCookie, getCookie, delCookie } from "@/utils/cookie.js"
+import MenuRoute from '@/config/menu_route.js'
 const Base64 = require("js-base64").Base64;
 export default {
   data() {
@@ -113,59 +113,41 @@ export default {
             account: this.loginForm.username.trim(),
             password: this.loginForm.password
           };
-          let str =
-            this.loginForm.username.trim() + ":" + this.loginForm.password;
+          let str = this.loginForm.username.trim() + ":" + this.loginForm.password;
           let tempStr = Base64.encode(str);
           let obj = {};
-          let token = "abcdefghigklmn";
-          setTimeout(() => {
-            loading.close();
-            this.$store.commit("LOGIN_IN", token);
-            this.$router.replace("/home");
-          }, 500);
-
-          // this.$http
-          //   .post("/api/login/bypwd", obj, {
-          //     headers: {
-          //       Authorization: "Basic " + tempStr
-          //     }
-          //   })
-          //   .then(result => {
-          //     loading.close();
-          //     const res = result.data;
-          //     if (res.code == 0) {
-          //       let has = this.hasAuthRole(res.data.userRole, this.centerRoles);
-          //       if (has && res.data.functions) {
-          //         //勾选了记住密码  开始写入cookie
-          //         if (vm.remember) {
-          //           const accountInfo =
-          //             vm.loginForm.username + "&" + vm.loginForm.password;
-          //           setCookie("accountInfo", accountInfo, 1440 * 3);
-          //         }
-          //         //没有勾选  删除cookie
-          //         else {
-          //           delCookie("accountInfo");
-          //         }
-          //         let token = res.data.token;
-          //         this.$store.commit("LOGIN_IN", token);
-          //         this.$router.replace("/home");
-          //       } else {
-          //         this.$message({
-          //           type: "error",
-          //           message: "权限不足,无法登陆"
-          //         });
-          //         return false;
-          //       }
-          //     } else {
-          //       this.$message({
-          //         type: "error",
-          //         message: "账号或者密码错误"
-          //       });
-          //     }
-          //   })
-          //   .finally(() => {
-          //     loading.close();
-          //   });
+          this.$http
+            .post("/token", obj, {
+              headers: {
+                Authorization: "Basic " + tempStr
+              }
+            })
+            .then(result => {
+              loading.close();
+              const res = result.data;
+              if (res.code == 0) {
+                //勾选了记住密码  开始写入cookie
+                if (vm.remember) {
+                  const accountInfo = vm.loginForm.username + "&" + vm.loginForm.password;
+                  setCookie('accountInfo', accountInfo, 1440 * 3)
+                }
+                //没有勾选  删除cookie
+                else {
+                  delCookie('accountInfo');
+                }
+                let token = res.token
+                this.$store.commit('LOGIN_IN', token)
+                this.$router.replace('/home')
+              } else {
+                this.$message({
+                  type: "error",
+                  message: "账号或者密码错误"
+                });
+              }
+            })
+            .finally(() => {
+              loading.close();
+            });
         } else {
           return false;
         }
@@ -173,20 +155,21 @@ export default {
     },
     loadAccountInfo() {
       var vm = this;
-      let accountInfo = getCookie("accountInfo");
+      let accountInfo = getCookie("accountInfo")
       if (Boolean(accountInfo) === false) {
-        vm.remember = false;
-        return false;
-      } else {
-        let index = accountInfo.indexOf("&");
-        vm.loginForm.username = accountInfo.substring(0, index);
-        vm.loginForm.password = accountInfo.substring(index + 1);
-        vm.remember = true;
+        vm.remember = false
+        return false
+      }
+      else {
+        let index = accountInfo.indexOf('&');
+        vm.loginForm.username = accountInfo.substring(0, index)
+        vm.loginForm.password = accountInfo.substring(index + 1)
+        vm.remember = true
       }
     }
   },
   mounted() {
-    this.loadAccountInfo();
+    this.loadAccountInfo()
   }
 };
 </script>
@@ -196,7 +179,6 @@ export default {
 .login-container {
   height: 100vh;
   width: 100%;
-
   .login_header {
     display: flex;
     height: 50px;
@@ -209,7 +191,7 @@ export default {
       align-items: center;
       .titleIcon {
         font-size: 30px;
-        color: #ff7725;
+        color: #1296db;
         padding-left: 30px;
         display: inline-block;
       }
@@ -222,8 +204,7 @@ export default {
     }
   }
   .login-content {
-    background-image: url("../../assets/login.png"),
-      url("../../assets/loginSmall.png");
+    background-image: url("../../assets/christmas-back.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     height: calc(100vh - 50px);
