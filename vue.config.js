@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const CompressionWebpackPlugin = require("compression-webpack-plugin");
 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -11,7 +12,7 @@ module.exports = {
   assetsDir: "assets",
   lintOnSave: false,
   css: {
-    extract: false,
+    extract: true,
     sourceMap: false,
     modules: false
   },
@@ -27,6 +28,7 @@ module.exports = {
       }
     }
   },
+  productionSourceMap: false,
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
@@ -46,7 +48,7 @@ module.exports = {
       vue: "Vue",
       "vue-router": "VueRouter",
       axios: "axios",
-      "echarts": "echarts"
+      "echarts": "echarts",
     },
     resolve: {
       alias: {
@@ -57,5 +59,16 @@ module.exports = {
       }
     }
   },
-  productionSourceMap: false
+  chainWebpack:config=>{
+    config.module
+            .rule('images')
+            .use('image-webpack-loader')
+            .loader('image-webpack-loader')
+            .options({ bypassOnDebug: true })
+            .end();
+    config.optimization.minimize(true);
+    config.optimization.splitChunks({
+      chunks:'all'
+    })
+  },
 };

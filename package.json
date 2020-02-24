@@ -34,11 +34,13 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "image-conversion": "^1.1.9",
+    "image-webpack-loader": "^6.0.0",
     "jquery": "^3.4.1",
     "js-base64": "^2.5.1",
     "moment": "^2.24.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "v-viewer": "^1.4.2",
     "vue-template-compiler": "^2.6.10"
   }

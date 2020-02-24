@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./_router/index";
 import store from "./store/index";
-import "element-ui/lib/theme-chalk/index.css";
+// import "element-ui/lib/theme-chalk/index.css";
 
 /**
  * element-ui
