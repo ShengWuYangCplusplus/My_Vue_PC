@@ -49,6 +49,8 @@ module.exports = {
       "vue-router": "VueRouter",
       axios: "axios",
       "echarts": "echarts",
+      'viewer':'Viewer',
+      'nprogress':'NProgress',
     },
     resolve: {
       alias: {
@@ -60,6 +62,7 @@ module.exports = {
     }
   },
   chainWebpack:config=>{
+    config.plugins.delete('prefetch')
     config.module
             .rule('images')
             .use('image-webpack-loader')

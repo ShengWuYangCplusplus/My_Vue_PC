@@ -1,10 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Login = () => import("views/login/login.vue")
-const NotFound = () => import('views/errorPage/404.vue')
-const Forbidden = () => import('views/errorPage/403.vue')
-const Layout = () => import('views/layout/index.vue')
-const Home = () => import('views/home/index.vue')
 
 Vue.use(VueRouter)
 /** 初始路由*/
@@ -13,7 +8,7 @@ const router = new VueRouter({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: () => import("views/login/login.vue")
     }
   ]
 })
@@ -23,7 +18,7 @@ const router = new VueRouter({
 export const DynamicRoutes = [
   {
     path: '',
-    component: Layout,
+    component:  () => import('views/layout/index.vue'),
     name: 'container',
     redirect: '/home',
     meta: {},
@@ -43,7 +38,7 @@ export const DynamicRoutes = [
       {
         id: 1,
         path: 'home',
-        component: Home,
+        component: () => import('views/home/index.vue'),
         name: 'home',
         meta: {
           name: '综合首页',
@@ -62,11 +57,11 @@ export const DynamicRoutes = [
   },
   {
     path: '/403',
-    component: Forbidden
+    component: () => import('views/errorPage/403.vue')
   },
   {
     path: '*',
-    component: NotFound
+    component:  () => import('views/errorPage/404.vue')
   }
 ]
 
