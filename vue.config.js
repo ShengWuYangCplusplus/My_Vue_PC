@@ -24,7 +24,7 @@ module.exports = {
     hot: true,
     proxy: {
       '/': {
-        target: "http://youziweb.cn:8588"
+        target: "http://youziweb.cn:8888"
       }
     }
   },
